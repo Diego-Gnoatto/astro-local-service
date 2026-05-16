@@ -1,0 +1,20 @@
+---
+import { CITIES, SERVICES, CONTACT } from '../../lib/constants';
+---
+
+<section id="areas" class="section-padding bg-dark">
+  <div class="container-main">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Areas de Atuacao</h2>
+    <p class="text-white/60 text-center max-w-2xl mx-auto mb-12">
+      Atendemos {{CITIES_LIST}} e regiao.
+    </p>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 stagger-children">
+      {CITIES.map((city) => (
+        <a href={`/${SERVICES[0]?.slug || 'servico'}/${city.slug}/`} class="p-4 bg-dark-light rounded-lg text-center hover:bg-primary/20 transition-all duration-300 border border-white/10 hover:border-primary">
+          <span class="font-semibold">{city.name}</span>
+          <span class="text-xs text-white/50 block">{city.state}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
