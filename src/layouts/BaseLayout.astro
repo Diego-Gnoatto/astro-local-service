@@ -1,0 +1,82 @@
+---
+import '../styles/global.css';
+import { SITE, COMPANY, CONTACT } from '../lib/constants';
+import { generateTitle, generateDescription, generateLocalBusinessSchema } from '../lib/seo';
+
+const {
+  title = generateTitle('{{TAGLINE}}'),
+  description = COMPANY.description,
+  image = '/og-image.png',
+  schema,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, SITE.url);
+const year = new Date().getFullYear();
+const defaultSchema = generateLocalBusinessSchema();
+const schemaData = schema || defaultSchema;
+---
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={generateDescription(description)} />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href={canonicalURL} />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={generateDescription(description)} />
+  <meta property="og:image" content={new URL(image, SITE.url).href} />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:locale" content="pt_BR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={generateDescription(description)} />
+  <meta name="twitter:image" content={new URL(image, SITE.url).href} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script type="application/ld+json" set:html={JSON.stringify(schemaData)} is:inline />
+</head>
+<body class="bg-dark text-white antialiased">
+  <header class="fixed top-0 left-0 right-0 z-50 bg-dark/90 backdrop-blur-lg border-b border-white/10">
+    <div class="container-main">
+      <div class="flex items-center justify-between h-16 md:h-20">
+        <a href="/" class="flex items-center gap-2">
+          <div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
+            <span class="text-white font-bold text-lg">{{LOGO_LETTERS}}</span>
+          </div>
+          <span class="font-bold text-lg hidden sm:block">{SITE.shortName}</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-8">
+          <a href="/#servicos" class="text-sm font-medium hover:text-primary transition-colors">Servicos</a>
+          <a href="/#como-funciona" class="text-sm font-medium hover:text-primary transition-colors">Como Funciona</a>
+          <a href="/#depoimentos" class="text-sm font-medium hover:text-primary transition-colors">Depoimentos</a>
+          <a href="/#faq" class="text-sm font-medium hover:text-primary transition-colors">FAQ</a>
+        </nav>
+        <a href={`${CONTACT.whatsappLink}?text=${encodeURIComponent('Ola! Gostaria de um orcamento.')}`} target="_blank" rel="noopener noreferrer" class="hidden md:inline-flex items-center gap-2 bg-accent hover:bg-accent-dark text-white font-semibold px-5 py-2.5 rounded-full transition-all duration-300 hover:scale-105">
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-20">
+    <slot />
+  </main>
+
+  <footer class="bg-dark-light border-t border-white/10">
+    <div class="container-main py-12">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-sm text-white/40">&copy; {year} {COMPANY.tradeName}. Todos os direitos reservados.</p>
+        <p class="text-xs text-white/30">{COMPANY.legalName} | CNPJ: {COMPANY.cnpj}</p>
+      </div>
+    </div>
+  </footer>
+
+  <slot name="after-footer" />
+</body>
+</html>
