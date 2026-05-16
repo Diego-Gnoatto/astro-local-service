@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE, COMPANY, CONTACT, CITIES, SERVICES, DIFFERENTIALS, FAQ } from '../lib/constants';
+import { generateTitle, generateLocalBusinessSchema, generateFAQSchema } from '../lib/seo';
+import HeroSection from '../components/sections/HeroSection.astro';
+import ServicosSection from '../components/sections/ServicosSection.astro';
+import DiferenciaisSection from '../components/sections/DiferenciaisSection.astro';
+import DepoimentosSection from '../components/sections/DepoimentosSection.astro';
+import AreasSection from '../components/sections/AreasSection.astro';
+import FAQSection from '../components/sections/FAQSection.astro';
+import CTASection from '../components/sections/CTASection.astro';
+import SectionDivider from '../components/ui/SectionDivider.astro';
+
+const title = generateTitle('{{HOMEPAGE_TITLE}}', CONTACT.address.city);
+const schema = generateLocalBusinessSchema();
+const faqSchema = generateFAQSchema(FAQ);
+---
+
+<BaseLayout title={title} schema={schema}>
+  <HeroSection />
+  <SectionDivider />
+  <ServicosSection />
+  <SectionDivider />
+  <DiferenciaisSection />
+  <SectionDivider />
+  <DepoimentosSection />
+  <SectionDivider />
+  <AreasSection />
+  <SectionDivider />
+  <FAQSection />
+  <CTASection />
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} is:inline />
+</BaseLayout>
