@@ -1,0 +1,22 @@
+---
+import { CONTACT, COMPANY } from '../../lib/constants';
+---
+
+<section class="section-padding bg-dark">
+  <div class="container-main text-center">
+    <h1 class="text-4xl md:text-6xl font-bold mb-6 fade-up">
+      {{HERO_HEADLINE}}
+    </h1>
+    <p class="text-xl text-white/70 max-w-2xl mx-auto mb-8 fade-up">
+      {{HERO_SUBHEADLINE}}
+    </p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 fade-up">
+      <a href={`${CONTACT.whatsappLink}?text=${encodeURIComponent('Ola! Gostaria de um orcamento.')}`} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-accent hover:bg-accent-dark text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:scale-105">
+        Solicite um Orcamento
+      </a>
+      <a href="tel:+{{PHONE_FULL}}" class="inline-flex items-center gap-2 border border-white/20 hover:border-primary text-white font-semibold px-8 py-4 rounded-full transition-all duration-300">
+        {{PHONE_FORMATTED}}
+      </a>
+    </div>
+  </div>
+</section>
