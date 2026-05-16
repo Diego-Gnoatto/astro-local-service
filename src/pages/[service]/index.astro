@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SERVICES, CONTACT, COMPANY } from '../../lib/constants';
+import { generateTitle, generateServiceSchema } from '../../lib/seo';
+
+export async function getStaticPaths() {
+  return SERVICES.map((service) => ({
+    params: { service: service.slug },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+const title = generateTitle(service.name, CONTACT.address.city);
+const schema = generateServiceSchema(service);
+---
+
+<BaseLayout title={title} schema={schema}>
+  <section class="section-padding">
+    <div class="container-main">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">{service.name} em {CONTACT.address.city}</h1>
+      <p class="text-lg text-white/70 max-w-3xl">{service.description}</p>
+      <!-- Add service-specific content here -->
+    </div>
+  </section>
+</BaseLayout>
