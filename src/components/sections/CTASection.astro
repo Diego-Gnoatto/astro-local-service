@@ -1,0 +1,18 @@
+---
+import { CONTACT } from '../../lib/constants';
+---
+
+<section class="section-padding bg-dark">
+  <div class="container-main text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">{{CTA_HEADLINE}}</h2>
+    <p class="text-white/60 max-w-2xl mx-auto mb-8">{{CTA_SUBHEADLINE}}</p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href={`${CONTACT.whatsappLink}?text=${encodeURIComponent('Ola! Gostaria de um orcamento.')}`} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-accent hover:bg-accent-dark text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:scale-105">
+        Fale Conosco pelo WhatsApp
+      </a>
+      <a href="tel:+{{PHONE_FULL}}" class="inline-flex items-center gap-2 border border-white/20 hover:border-primary text-white font-semibold px-8 py-4 rounded-full transition-all duration-300">
+        Ligar Agora
+      </a>
+    </div>
+  </div>
+</section>
