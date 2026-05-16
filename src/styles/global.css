@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: {{PRIMARY_COLOR}};
+  --color-primary-dark: {{PRIMARY_DARK_COLOR}};
+  --color-accent: {{ACCENT_COLOR}};
+  --color-accent-dark: {{ACCENT_DARK_COLOR}};
+  --color-dark: #0F172A;
+  --color-dark-light: #1E293B;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-dark text-white antialiased;
+  }
+}
+
+@layer components {
+  .container-main {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+  .fade-up {
+    @apply opacity-0 translate-y-8 transition-all duration-700;
+  }
+  .fade-up.visible {
+    @apply opacity-100 translate-y-0;
+  }
+}
