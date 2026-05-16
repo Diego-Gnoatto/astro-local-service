@@ -1,0 +1,21 @@
+---
+import { DIFFERENTIALS } from '../../lib/constants';
+---
+
+<section id="diferenciais" class="section-padding bg-dark">
+  <div class="container-main">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Por que nos escolher?</h2>
+    <p class="text-white/60 text-center max-w-2xl mx-auto mb-12">{{DIFFERENTIALS_INTRO}}</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 stagger-children">
+      {DIFFERENTIALS.map((diff) => (
+        <div class="text-center p-6">
+          <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
+            <span class="text-3xl">{{DIFF_ICON}}</span>
+          </div>
+          <h3 class="text-lg font-bold mb-2">{diff.title}</h3>
+          <p class="text-white/60 text-sm">{diff.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
