@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SERVICES, CITIES, CONTACT } from '../../../lib/constants';
+import { generateTitle, generateServiceSchema } from '../../../lib/seo';
+
+export async function getStaticPaths() {
+  const paths: Array<{ params: { service: string; city: string }; props: { service: typeof SERVICES[0]; city: typeof CITIES[0] } }> = [];
+  for (const service of SERVICES) {
+    for (const city of CITIES) {
+      paths.push({
+        params: { service: service.slug, city: city.slug },
+        props: { service, city },
+      });
+    }
+  }
+  return paths;
+}
+
+const { service, city } = Astro.props;
+const title = generateTitle(service.name, city.name);
+const schema = generateServiceSchema(service, city.name);
+---
+
+<BaseLayout title={title} schema={schema}>
+  <section class="section-padding">
+    <div class="container-main">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">{service.name} em {city.name}</h1>
+      <p class="text-lg text-white/70 max-w-3xl">
+        {service.description} Atendemos {city.name} e regiao.
+      </p>
+      <!-- Add city-specific content here -->
+    </div>
+  </section>
+</BaseLayout>
